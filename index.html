@@ -3,54 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>술 계산기</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="칵테일 도수 계산과 혈중 알코올 농도(BAC)를 간편하게 계산할 수 있는 술 계산기">
+  <title>술 계산기 – 도수 & BAC</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍸</text></svg>">
 </head>
 <body>
 
   <div class="wrapper">
-    <header>🍹 술 계산기</header>
+    <header>
+      🍸 술 계산기
+      <span class="subtitle">도수 · 혈중 알코올 농도</span>
+    </header>
 
-    <div class="menu">
-      <button onclick="showCalculator('alc-percent')">칵테일 도수 계산</button>
-      <button onclick="showCalculator('bac')">혈중 알코올 농도</button>
-      <button onclick="showCalculator('price')">칵테일 가격 계산</button>
+    <div class="menu" id="nav-menu">
+      <button id="btn-alc" onclick="showCalculator('alc-percent')">🧪 칵테일 도수</button>
+      <button id="btn-bac" onclick="showCalculator('bac')">🩸 혈중 알코올</button>
     </div>
 
     <!-- 도수 계산 -->
     <div id="alc-percent" class="calculator">
       <h2>칵테일 도수 계산</h2>
       <div id="alc-list"></div>
-      <button class="action-btn" onclick="addAlcoholInput('alc-list')">술 추가</button>
-      <button class="action-btn" onclick="calcAlcoholPercent()">계산</button>
+      <div class="btn-group">
+        <button class="action-btn secondary" onclick="addAlcoholInput('alc-list')">＋ 술 추가</button>
+        <button class="action-btn" onclick="calcAlcoholPercent()">계산하기</button>
+      </div>
       <div id="result1" class="result"></div>
     </div>
 
     <!-- BAC 계산 -->
     <div id="bac" class="calculator">
       <h2>혈중 알코올 농도</h2>
-      <label>몸무게(kg)</label>
-      <input type="number" id="weight">
 
-      <label>성별 (남=1, 여=2)</label>
-      <input type="number" id="sex" min="1" max="2">
+      <label for="weight">몸무게 (kg)</label>
+      <input type="number" id="weight" placeholder="예: 70">
 
-      <label>마신 후 경과 시간(시간)</label>
-      <input type="number" id="hour" step="0.1">
+      <label>성별</label>
+      <div class="gender-select">
+        <button type="button" id="gender-male" onclick="selectGender(1)">🙋‍♂️ 남성</button>
+        <button type="button" id="gender-female" onclick="selectGender(2)">🙋‍♀️ 여성</button>
+      </div>
+      <input type="hidden" id="sex" value="">
+
+      <label for="hour">마신 후 경과 시간 (시간)</label>
+      <input type="number" id="hour" step="0.1" placeholder="예: 1.5">
+
+      <div class="divider"></div>
 
       <div id="bac-list"></div>
-      <button class="action-btn" onclick="addAlcoholInput('bac-list')">술 추가</button>
-      <button class="action-btn" onclick="calcBAC()">계산</button>
+      <div class="btn-group">
+        <button class="action-btn secondary" onclick="addAlcoholInput('bac-list')">＋ 술 추가</button>
+        <button class="action-btn" onclick="calcBAC()">계산하기</button>
+      </div>
       <div id="result2" class="result"></div>
-    </div>
-
-    <!-- 가격 계산 -->
-    <div id="price" class="calculator">
-      <h2>칵테일 가격 계산</h2>
-      <div id="price-list"></div>
-      <button class="action-btn" onclick="addPriceInput()">술 추가</button>
-      <button class="action-btn" onclick="calcPrice()">계산</button>
-      <div id="result3" class="result"></div>
     </div>
   </div>
 
